@@ -15,7 +15,7 @@
   <tbody>
     <% @cars.each do |car| %>
       <tr>
-        <td><%= car.make %></td>
+        <td><%= car.make.name %></td>   <!-- Displays the name of the Make, rather than the id -->
         <td><%= car.model %></td>
         <td><%= car.vin %></td>
         <td><%= link_to 'Show', car %></td>

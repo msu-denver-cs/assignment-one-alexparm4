@@ -15,10 +15,18 @@ class CarsController < ApplicationController
   # GET /cars/new
   def new
     @car = Car.new
+    @parts = Part.all     #When a new car object is to be created,
+                        #this evocation will allow any existing parts
+                        #to be selected at creation time.  
+                        #Citation: Guided by 03ActiveRecord PPP slide 33
   end
 
   # GET /cars/1/edit
   def edit
+    @parts = Part.all     #When a new car object is to be edited,
+                          #this evocation will allow any existing parts
+                          #to be selected at the time of the edit.
+                          #Citation: Guided by 03ActiveRecord PPP slide 33
   end
 
   # POST /cars
@@ -69,6 +77,10 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:make_id, :model, :vin)
+      params.require(:car).permit(:make_id, :model, :vin, :part_ids=>[])
+                                              #Most of this line was auto-generated, however
+                                              #', :part_ids=>[]' is added to force a Car object
+                                              #to also need Part(s).
+                                              #Citation: Guided by 03ActiveRecord PPP slide 33
     end
 end
